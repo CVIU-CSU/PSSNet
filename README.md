@@ -36,7 +36,7 @@ pip install imgviz
 
 ## Dataset Preparations
 
-We Use [DDR](https://github.com/nkicsl/DDR-dataset), [IDRiD](https://ieee-dataport.org/open-access/indian-diabetic-retinopathy-image-dataset-idrid), [REFUGE](https://refuge.grand-challenge.org/), [RETA](https://reta-benchmark.org/), [ARIA](http://www.damianjjfarnell.com/?page_id=276), [DRIVE](https://drive.grand-challenge.org/), [STARE](http://cecas.clemson.edu/~ahoover/stare/). We crop black image background and pad the image with value zero so that the short and long sides are the same length. 
+We use [DDR](https://github.com/nkicsl/DDR-dataset), [IDRiD](https://ieee-dataport.org/open-access/indian-diabetic-retinopathy-image-dataset-idrid), [REFUGE](https://refuge.grand-challenge.org/), [RETA](https://reta-benchmark.org/), [ARIA](http://www.damianjjfarnell.com/?page_id=276), [DRIVE](https://drive.grand-challenge.org/), [STARE](http://cecas.clemson.edu/~ahoover/stare/). We crop black image background and pad the image with value zero so that the short and long sides are the same length. 
 
 Data pre-processing consists of three main steps:
 
