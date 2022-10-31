@@ -2,7 +2,7 @@
 
 ## Environment
 
-This code us based on [mmsegmentation](https://github.com/open-mmlab/mmsegmentation/)
+This code is based on [mmsegmentation](https://github.com/open-mmlab/mmsegmentation/)
 
 * python == 3.8
 
