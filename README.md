@@ -36,13 +36,13 @@ pip install imgviz
 
 ## Dataset Preparations
 
-We use [DDR](https://github.com/nkicsl/DDR-dataset), [IDRiD](https://ieee-dataport.org/open-access/indian-diabetic-retinopathy-image-dataset-idrid), [REFUGE](https://refuge.grand-challenge.org/), [RETA](https://reta-benchmark.org/), [ARIA](http://www.damianjjfarnell.com/?page_id=276), [DRIVE](https://drive.grand-challenge.org/), [STARE](http://cecas.clemson.edu/~ahoover/stare/). We crop black image background and pad the image with value zero so that the short and long sides are the same length. 
+We use [DDR](https://github.com/nkicsl/DDR-dataset), [IDRiD](https://ieee-dataport.org/open-access/indian-diabetic-retinopathy-image-dataset-idrid), [REFUGE](https://refuge.grand-challenge.org/), [RETA](https://reta-benchmark.org/), [ARIA](http://www.damianjjfarnell.com/?page_id=276), [DRIVE](https://drive.grand-challenge.org/), [STARE](http://cecas.clemson.edu/~ahoover/stare/). We crop the field of view region from the fundus image and pad it with zeros so that the short and long sides are of equal length.
 
 Data pre-processing consists of three main steps:
 
 1. generate annotations
-2. crop black image background
-3. pad the image with value zero
+2. crop the field of view region
+3. pad the image with zeros
 
 Please see [prepare_dataset](prepare_dataset)
 
@@ -65,30 +65,21 @@ Please see [prepare_dataset](prepare_dataset)
 
 The training process consists of two stages: pseudo label generator training and adversarial retraining with pseudo and partial GT labels. 
 
-1. Pseudo label generator training
+1. Train pseudo label generator
 
    ```shell
    bash mmsegmentation-0.18.0/tools/dist_train_multi_task.sh mmsegmentation-0.18.0/configs/_multi_task_/upernet_swin_tiny_patch4_window7_512x512_40k_multi_pretrain_224x224_1K_group_idrid_ddr_refuge.py 4
    ```
 
-2. To generate pseudo label, set test dataset in config file, mode and output_dir, run
+2. Generate pseudo labels. Set test dataset in config file, mode and output_dir, then run
 
    ```shell
    bash mmsegmentation-0.18.0/tools/dist_test_gan.sh mmsegmentation-0.18.0/configs/_multi_task_/upernet_swin_tiny_patch4_window7_512x512_40k_multi_pretrain_224x224_1K_group_idrid_ddr_refuge.py work_dirs/upernet_swin_tiny_patch4_window7_512x512_40k_multi_pretrain_224x224_1K_group_idrid_ddr_refuge/iter_60000.pth 4 --vis --source mode --output_dir output_dir
    ```
 
-3. Place the generated pseudo label in the appropriate directory. With the DDR dataset as an example,  The folder should be structured as
+   Please note that the pseudo-label path in the [config file](configs/_base_/datasets/multi_task_vessel_lesion_OD_idrid_ddr_refuge_semi_OD.py) should correspond to the actual path.
 
-   ```none
-   |data/
-   │—— FOVCrop-padding/
-   │   ├—— DDR-FOVCrop-padding/  
-   |   |   ├—— train/
-   |   |       ├—— ddr_ODOC_pseudo/
-   |   |       ├—— ddr_vessel_pseudo/
-   ```
-
-4. Adversarial retraining with pseudo and partial GT labels
+3. Adversarially retrain the segmentation model with pseudo and partial GT labels
 
    ```shell
    bash mmsegmentation-0.18.0/tools/dist_train_gan.sh mmsegmentation-0.18.0/configs/_multi_gan_/gan_bdice_vessel_lesion_OD_idrid_ddr_refuge_semi_OD_0.1_0.05_60k_128_group_window_size16.py 4
@@ -96,7 +87,7 @@ The training process consists of two stages: pseudo label generator training and
 
 ## Evaluation
 
-Set test dataset in config file, run
+Set test dataset in config file, then run
 
 ```shell
 bash mmsegmentation-0.18.0/tools/dist_test_gan.sh mmsegmentation-0.18.0/configs/_multi_gan_/gan_bdice_vessel_lesion_OD_idrid_ddr_refuge_semi_OD_0.1_0.05_60k_128_group_window_size16.py work_dirs/gan_bdice_vessel_lesion_OD_idrid_ddr_refuge_semi_OD_0.1_0.05_60k_128_group_window_size16/ckpt/iter_60000.pth 4 --eval mIoU 
@@ -110,7 +101,7 @@ bash mmsegmentation-0.18.0/tools/dist_test_gan.sh mmsegmentation-0.18.0/configs/
 
 ## Models
 
-We provide the final model and training logs [here](https://pan.baidu.com/s/1g7wKibZQd9y5XsKPGHhE1w?pwd=or7n)
+We provide the final model and training logs [here](https://drive.google.com/file/d/1Egss_17VzDCRli3YD-6V5BCRH0ZrQ-FW/view)
 
 ## Citation
 
