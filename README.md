@@ -52,13 +52,53 @@ Please see [prepare_dataset](prepare_dataset)
 |mmsegmentation-0.18.0/
 |data/
 │—— FOVCrop-padding/  
-|	|--DDR-FOVCrop-padding
+|	|--DDR-FOVCrop-padding/
+|	|	|--train/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--val/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--test/
+|	|	|	|--images/
+|	|	|	|--ann/
 |	|--RETA
+|	|	|--train/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--test/
+|	|	|	|--images/
+|	|	|	|--ann/
 |	|--REFUGE-FOVCrop-padding
+|	|	|--train/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--val/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--test/
+|	|	|	|--images/
+|	|	|	|--ann/
 |	|--DRIVE-FOVCrop-padding
+|	|	|--train/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--test/
+|	|	|	|--images/
+|	|	|	|--ann/
 |	|--STARE-FOVCrop-padding
+|	|	|--images/
+|	|	|--ann/
 |	|--IDRiD-FOVCrop-padding
+|	|	|--train/
+|	|	|	|--images/
+|	|	|	|--ann/
+|	|	|--test/
+|	|	|	|--images/
+|	|	|	|--ann/
 |	|--ARIA-FOVCrop-padding
+|	|	|--images/
+|	|	|--ann/
 ```
 
 ## Training

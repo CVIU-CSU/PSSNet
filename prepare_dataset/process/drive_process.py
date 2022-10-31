@@ -5,7 +5,7 @@ import numpy as np
 
 for dataset in ['training','test']:
 	img_dir = 'D:/dataset/Drive/{}/image_crop'.format(dataset)
-	label_dir = 'D:/dataset/Drive/{}/ann_crop'.format(dataset)
+	label_dir = 'D:/dataset/Drive/{}/ann_crop'.format(dataset) # we use 1-st annotation
 	output_img_dir = 'D:/dataset/Drive/{}/image_pad'.format(dataset)
 	output_label_dir = 'D:/dataset/Drive/{}/ann_pad'.format(dataset)
 
